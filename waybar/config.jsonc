@@ -1,0 +1,78 @@
+[
+{
+	"layer": "top",
+	"output": ["DP-2", "DP-3"],
+	"passthrough": false,
+	"height": 0,
+	"margin-top": 2,
+	"margin-left": 5,
+	"spacing": 0,
+
+	// Left Side
+	"modules-left": [
+	//	"custom/rofi",
+		"wlr/taskbar",
+		"hyprland/window"
+	],
+	// Center Side
+	"modules-center": [
+		"hyprland/workspaces"
+	],
+	// Right Side
+	"modules-right": [
+		"tray",
+		"group/quicklinks",
+		"battery",
+		"network",
+		"pulseaudio",
+		"clock",
+		"custom/exit"
+	],
+	//Include submodules
+	"include": ["/git/nogarremi/self/dotfiles/waybar/modules.jsonc"],
+
+	"group/quicklinks": {
+		"orientation": "horizontal",
+		"modules": [
+			"custom/fileexplorer",
+			"custom/firefox"
+		]
+	}
+},
+{
+	"layer": "top",
+	"output": "HDMI-A-4",
+	"passthrough": false,
+	"height": 0,
+	"margin-top": 2,
+	"margin-left": 5,
+	"spacing": 0,
+
+	// Left Side
+	"modules-left": [
+	//	"custom/rofi",
+		"wlr/taskbar",
+		"hyprland/window"
+	],
+	// Center Side
+	"modules-center": [
+	],
+	// Right Side
+	"modules-right": [
+		"group/quicklinks",
+		"pulseaudio",
+		"clock",
+		"custom/exit"
+	],
+	//Include submodules
+	"include": ["/git/nogarremi/self/dotfiles/waybar/modules.jsonc"],
+
+	"group/quicklinks": {
+		"orientation": "horizontal",
+		"modules": [
+			"custom/fileexplorer",
+			"custom/firefox"
+		]
+	}
+}
+]

@@ -1,0 +1,92 @@
+{
+    // Left Side
+    "custom/rofi": {
+	    "format": "",
+	    "on-click": "rofi -show drun"
+    },
+    // Taskbar
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 18,
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "rewrite": {
+            "Firefox Web Browser": "Firefox",
+            "Foot Server": "Terminal"
+        }
+    },
+    "hyprland/window": {
+        "format": "{}",
+	"max-length": 25
+    },
+
+    // Center Side
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+	"format": "",
+	"format-icons": {
+		"urgent": "",
+		"active": "",
+		"default": ""
+	},
+        "on-click": "activate"
+    },
+
+    // Right Side
+    "tray": {
+	    "spacing": 5
+    },
+    "custom/fileexplorer": {
+	    "format": "",
+	    "on-click": "thunar"
+    },
+    "custom/firefox": {
+	    "format": "",
+	    "on-click": "firefox"
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{icon}  {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", "", ""]
+    },
+    "network": {
+	"format": "{ifname}",
+	"format-wifi": "{essid} ({signalStrength}%) ",
+	"format-ethernet": "",
+	"format-disconnected": "Disconnected",
+	"on-click": "nmtui"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "tooltip": false,
+        "format-muted": " Muted",
+        "on-click": "pamixer -t",
+	"on-scroll-up": "pamixer -i 5", 
+	"on-scroll-down": "pamixer -d 5",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },
+    "clock": {
+        "format": "{: %R   %Y-%m-%d}"
+    },
+    "custom/exit": {
+	    "format": "",
+	    "on-click": "wlogout"
+    }
+}

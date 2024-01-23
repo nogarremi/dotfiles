@@ -1,6 +1,14 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./hyprland.nix
+    ./rofi.nix
+    ./swaylock.nix
+    ./waybar.nix
+    ./wlogout.nix
+  ];
+
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   # Let Home Manager install and manage itself.
@@ -11,41 +19,33 @@
   home.username = "nogarremi";
   home.homeDirectory = "/home/nogarremi";
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = [
-  ];
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+  home.keyboard = {
+    layout = "us";
+    variant = "colemak";
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. If you don't want to manage your shell through Home
-  # Manager then you have to manually source 'hm-session-vars.sh' located at
-  # either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/nogarremi/etc/profile.d/hm-session-vars.sh
-  #
+  programs.git = {
+    enable = true;
+    aliases = {
+      co = "checkout";
+      sw = "switch";
+      br = "branch";
+    };
+    userName = "Nogarremi";
+    userEmail = "nogarremi@nogarremi.com";
+  };
+
+  programs.zsh.loginExtra = ''
+#!/bin/zsh
+[ "$(tty)" = "/dev/tty1" ] && exec Hyprland
+  '';
+
+  programs.kitty = {
+    shellIntegration.enableZshIntegration = true;
+  };
+
+  services.ssh-agent.enable = true;
+
   home.sessionVariables = {
     EDITOR = "nvim";
   };

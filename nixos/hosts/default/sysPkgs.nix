@@ -4,8 +4,16 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  programs.hyprland.enable = true;
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    histSize = 10000;
+    histFile = "$HOME/.histfile";
+    ohMyZsh.enable = true;
+    shellAliases = {
+    	updater = "sudo nixos-rebuild switch --flake $HOME/git/GitHub/dotfiles/nixos/#default";
+	rollback = "sudo nixos-rebuild --rollback switch";
+    };
+  };
 
   # Permitted insecure packages
   nixpkgs.config.permittedInsecurePackages = [
@@ -14,37 +22,11 @@
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-    neovim
     open-vm-tools
-    webcord
-    obsidian
-    steam
-    mangohud
-    gamescope
-    pyenv
-    _1password-gui
     vmware-workstation
-    xfce.thunar
-    xfce.thunar-volman
-    xfce.thunar-archive-plugin
     zsh
     kitty
-    audacity
     blueman
     cloudflared
-    firefox
-    nerdfonts
-    zig
-    lutris-unwrapped
-    yubico-pam
-    yubikey-manager
-    vopono
-    swww
-    sway-audio-idle-inhibit
-    gamemode
-    waybar
-    dunst
-    rofi-wayland
-    git
   ];
 }

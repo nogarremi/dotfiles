@@ -10,6 +10,9 @@
       ./hardware-configuration.nix
       ./bootloader.nix
       ./sysPkgs.nix
+      ./desktop.nix
+      ./gaming.nix
+      ./productivity.nix
       inputs.home-manager.nixosModules.default
       ../../modules/nixos/my_user.nix 
     ];
@@ -58,6 +61,9 @@
       "nogarremi" = import ./home.nix;
     };
   };
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

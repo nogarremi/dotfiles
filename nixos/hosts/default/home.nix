@@ -24,6 +24,13 @@
     variant = "colemak";
   };
 
+  systemd.user.tmpfiles.rules = [
+    "L /home/nogarremi/git/ - - - - /git/nogarremi/"
+    "L /home/nogarremi/Downloads/ - - - - /shared/Downloads"
+    "L /home/nogarremi/Documents/ - - - - /shared/Documents"
+    "L /home/nogarremi/Pictures/ - - - - /shared/Pictures"
+  ];
+
   programs.git = {
     enable = true;
     aliases = {
@@ -34,11 +41,6 @@
     userName = "Nogarremi";
     userEmail = "nogarremi@nogarremi.com";
   };
-
-  programs.zsh.loginExtra = ''
-#!/bin/zsh
-[ "$(tty)" = "/dev/tty1" ] && exec Hyprland
-  '';
 
   programs.kitty = {
     shellIntegration.enableZshIntegration = true;

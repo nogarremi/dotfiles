@@ -3,8 +3,6 @@
 {
   programs.waybar = {
     enable = true;
-    systemd.enable = true;
-    systemd.target = "hyprland-session.target";
     settings = {
       horiMons = {
         layer = "top";

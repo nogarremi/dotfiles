@@ -20,6 +20,7 @@ in
       isNormalUser = true;
       extraGroups = [ "networkmanager" "wheel" ];
       shell = pkgs.zsh;
+      initialPassword = "initPass";
     };
   };
 }

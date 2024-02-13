@@ -4,25 +4,104 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "mptspi" "uhci_hcd" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" "i915.force_probe=56a0"];
   boot.extraModulePackages = [ ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.extraModprobeConfig = ''
+    options snd_usb_audio vid=0x1235 pid=0x8213 device_setup=1
+  '';
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/e5387fb8-acf4-45e5-af8e-be1e10a7c1f4";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/6daf2690-1def-4c13-9b61-d325cab8fcad";
+      fsType = "btrfs";
+      options = [ "subvol=@root" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/6daf2690-1def-4c13-9b61-d325cab8fcad";
+      fsType = "btrfs";
+      options = [ "subvol=@nix" ];
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/6daf2690-1def-4c13-9b61-d325cab8fcad";
+      fsType = "btrfs";
+      options = [ "subvol=@home" ];
+    };
+
+  fileSystems."/games" =
+    { device = "/dev/disk/by-uuid/6daf2690-1def-4c13-9b61-d325cab8fcad";
+      fsType = "btrfs";
+      options = [ "subvol=@games" ];
+    };
+
+  fileSystems."/games/main" =
+    { device = "/dev/disk/by-uuid/6daf2690-1def-4c13-9b61-d325cab8fcad";
+      fsType = "btrfs";
+      options = [ "subvol=@games/main" ];
+    };
+
+  fileSystems."/games/second" =
+    { device = "/dev/disk/by-uuid/0af420b3-ae91-4017-a663-4a2a66433983";
+      fsType = "btrfs";
+      options = [ "subvol=@games_second" ];
+    };
+
+  fileSystems."/shared" =
+    { device = "/dev/disk/by-uuid/0af420b3-ae91-4017-a663-4a2a66433983";
+      fsType = "btrfs";
+      options = [ "subvol=@shared" ];
+    };
+
+  fileSystems."/shared/Documents" =
+    { device = "/dev/disk/by-uuid/0af420b3-ae91-4017-a663-4a2a66433983";
+      fsType = "btrfs";
+      options = [ "subvol=@docs" ];
+    };
+
+  fileSystems."/shared/Downloads" =
+    { device = "/dev/disk/by-uuid/0af420b3-ae91-4017-a663-4a2a66433983";
+      fsType = "btrfs";
+      options = [ "subvol=@downloads" ];
+    };
+
+  fileSystems."/shared/Pictures" =
+    { device = "/dev/disk/by-uuid/0af420b3-ae91-4017-a663-4a2a66433983";
+      fsType = "btrfs";
+      options = [ "subvol=@pics" ];
+    };
+
+  fileSystems."/git" =
+    { device = "/dev/disk/by-uuid/0af420b3-ae91-4017-a663-4a2a66433983";
+      fsType = "btrfs";
+      options = [ "subvol=@git" ];
+    };
+
+  fileSystems."/etc/nixos" =
+    { device = "/nix/persist/etc/nixos";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/var/log" =
+    { device = "/nix/persist/var/log";
+      fsType = "none";
+      options = [ "bind" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/059C-A4FF";
+    { device = "/dev/disk/by-uuid/8A28-CD2A";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/7408990d-2f5c-468c-8614-f38455e4b344"; }
+    [ { device = "/dev/disk/by-uuid/67cb204d-5666-4fcf-8698-d2fb65ebe5a3"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -30,7 +109,9 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.ens33.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp11s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp10s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

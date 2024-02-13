@@ -4,6 +4,11 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
   environment.systemPackages = with pkgs; [
     neovim
     obsidian
@@ -11,6 +16,7 @@
     git
     firefox
     vopono
+    wireguard-tools
     zip
     yubico-pam
     yubikey-manager

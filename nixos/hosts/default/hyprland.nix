@@ -3,9 +3,7 @@
 let
   startupScript = pkgs.pkgs.writeShellScriptBin "bg_setter" ''
     ${pkgs.swww}/bin/swww init &
-
     sleep 0.3
-
     ${pkgs.swww}/bin/swww img /shared/Pictures/wallpapers/sf6_char_background.webp &
   '';
 in
@@ -76,13 +74,13 @@ in
 	drop_shadow = true;
 	shadow_range = "4";
 	shadow_render_power = "3";
-	"col.shadow" = "rgba(1a1a1ee)";
+	"col.shadow" = "rgba(1a1a1aee)";
 	blur = {
 	  enabled = true;
 	  size = "3";
 	};
       };
-      animation = {
+      animations = {
 	enabled = true;
 	bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
 
@@ -111,9 +109,9 @@ in
 	"${startupScript}/bin/bg_setter"
 
         ## Once - Special Apps
-        "[workspace special:discord silent] ${pkgs.webcord}/bin/discord"
+        "[workspace special:discord silent] ${pkgs.webcord}/bin/webcord"
         "[workspace special:obsidian silent] ${pkgs.obsidian}/bin/obsidian"
-        # "[workspace special:cider silent] cider"
+        "[workspace special:cider silent] ${pkgs.appimage-run}/bin/appimage-run cider"
         "[workspace special:steam silent] ${pkgs.steam}/bin/steam"
       ];
 
@@ -130,11 +128,11 @@ in
         
 	# Killing/Locking
 	"$mainMod, Q, killactive"
-	"$mainMod, CTRL, Escape, exec, ${pkgs.wlogout}/bin/wlogout"
+	"$mainMod CTRL, Escape, exec, ${pkgs.wlogout}/bin/wlogout"
 	
 	# Programs
 	"$mainMod, Return, exec, ${pkgs.kitty}/bin/kitty"
-	"$mainMod, Space, exec, ${pkgs.kitty}/bin/rofi -show drun"
+	"$mainMod, Space, exec, ${pkgs.rofi}/bin/rofi -show drun"
 	
 	# Special Workspaces
 	"$mainMod, grave, togglespecialworkspace"

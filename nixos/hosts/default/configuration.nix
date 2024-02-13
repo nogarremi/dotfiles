@@ -49,7 +49,9 @@
   services.xserver = {
     layout = "us";
     xkbVariant = "colemak";
+    videoDrivers = [ "i915" ];
   };
+  console.useXkbConfig = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   my_user.enable = true;

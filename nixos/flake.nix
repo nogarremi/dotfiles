@@ -8,12 +8,25 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    waybar = {
+      url = "github:Alexays/Waybar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    #swww = {
+    #  url = "github:LGFae/swww";
+    #  flake = false;
+    #};
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: 
+  outputs = { self, nixpkgs, waybar, ... }@inputs: 
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      packages =  import nixpkgs {
+        overlays = [ waybar.overlay ];
+	inherit system;
+      };
     in
     {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {

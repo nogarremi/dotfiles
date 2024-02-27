@@ -26,5 +26,6 @@
     xfce.thunar-archive-plugin
     audacity
     webcord
+    zig
   ];
 }

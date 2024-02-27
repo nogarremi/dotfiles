@@ -47,8 +47,10 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "colemak";
+    xkb = { 
+      layout = "us";
+      variant = "colemak";
+    };
     videoDrivers = [ "i915" ];
   };
   console.useXkbConfig = true;

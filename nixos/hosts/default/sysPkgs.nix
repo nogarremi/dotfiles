@@ -58,6 +58,7 @@ EOF
 
 GPG_TTY=$(tty)
 export GPG_TTY
+eval "$(zoxide init --cmd cd zsh)"
     '';
   };
 
@@ -71,6 +72,8 @@ export GPG_TTY
     open-vm-tools
     vmware-workstation
     zsh
+    fzf
+    zoxide
     kitty
     blueman
     cloudflared

@@ -29,6 +29,7 @@
     "L /home/nogarremi/Downloads/ - - - - /shared/Downloads"
     "L /home/nogarremi/Documents/ - - - - /shared/Documents"
     "L /home/nogarremi/Pictures/ - - - - /shared/Pictures"
+    "L /home/nogarremi/.config/nvim/init.lua - - - - /git/nogarremi/GitHub/dotfiles/neovim/init.lua"
   ];
 
   programs.git = {

@@ -22,7 +22,6 @@ in
 
       # Get rid of Vaxry's terrible loli fantasy
       misc = {
-        force_hypr_chan = false;
 	disable_hyprland_logo = true;
 	force_default_wallpaper = "0";
       };
